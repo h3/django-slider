@@ -1,0 +1,35 @@
+{% load thumbnail %}
+{% spaceless %}
+{% if slider_images %}
+<div id="{{ slider }}" class="carousel slide span{{ span }}">
+    <div class="carousel-inner">
+        {% for image in slider_images %}
+        {# Item #}
+        {% if image.link %}
+        <a class="item{% if forloop.first %} active{% endif %}" href="{{ image.link }}" target="{{ image.target }}">
+        {% else %}
+        <div class="item{% if forloop.first %} active{% endif %}">
+        {% endif %}
+            {# Image #}
+            <img src="{% thumbnail image.photo size crop=image.crop sharpen=image.sharpen upscale=image.upscale %}"
+                {% if image.title %}alt="{{ image.title }}"{% endif %}>
+            {# /Image #}
+            {# Caption#}
+            {% if image.title or image.caption %}
+            <div class="carousel-caption">
+                {% if image.title %}<h4>{{ image.title }}</h4>{% endif %}
+                {% if image.caption %}<p>{{ image.caption }}</p>{% endif %}
+            </div>
+            {% endif %}
+            {# /Caption#}
+        {% if image.link %}</a>{% else %}</div>{% endif %}
+        {# /Item #}
+        {% endfor %}
+    </div>
+    {% if show_nav %}
+    <a class="carousel-control left" href="#{{ slider }}" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#{{ slider }}" data-slide="next">&rsaquo;</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endspaceless %}
