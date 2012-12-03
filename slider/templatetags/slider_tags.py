@@ -17,8 +17,10 @@ def render_slider(slider, *args, **kwargs):
     span     = kwargs.get('span', 12)
     limit    = kwargs.get('limit', 10)
     shuffle  = kwargs.get('shuffle', True)
-    show_nav = kwargs.get('show_nav', True)
+    show_nav = kwargs.get('show_nav')
     size     = kwargs.get('size', '940x300')
+
+    show_nav = False if show_nav.lower() == 'false' else True
 
     return {
         'slider_images': get_slider_iamges(slider, limit=limit, shuffle=shuffle),
