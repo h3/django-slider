@@ -1,19 +1,23 @@
 from django.contrib import admin
 from django.utils.translation import ugettext as _
+from django.conf import settings as django_settings
 
 from slider.utils import AdminThumbnailMixin, file_cleanup
 from slider.conf import settings
 from slider.models import *
 
-try:
-    from grappellifit.admin import TranslationAdmin
-    BaseAdmin = TranslationAdmin
-except:
+if 'modeltranslation' in django_settings.INSTALLED_APPS:
     try:
-        from modeltranslation.admin import TranslationAdmin
+        from grappellifit.admin import TranslationAdmin
         BaseAdmin = TranslationAdmin
     except:
-        BaseAdmin = admin.ModelAdmin
+        try:
+            from modeltranslation.admin import TranslationAdmin
+            BaseAdmin = TranslationAdmin
+        except:
+            BaseAdmin = admin.ModelAdmin
+else:
+    BaseAdmin = admin.ModelAdmin
 
 
 class SliderAdmin(admin.ModelAdmin):
