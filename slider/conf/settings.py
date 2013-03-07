@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
+DEFAULT = getattr(settings, 'SLIDER_DEFAULT', None)
 
 TEMPLATE = getattr(settings, 'SLIDER_TEMPLATE', 'slider/bootstrap.html')
 

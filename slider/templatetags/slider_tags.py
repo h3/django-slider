@@ -19,12 +19,15 @@ def render_slider(slider, *args, **kwargs):
     shuffle  = kwargs.get('shuffle', True)
     show_nav = kwargs.get('show_nav', "True")
     size     = kwargs.get('size', '940x300')
+    default  = kwargs.get('default', settings.DEFAULT)
+    images   = get_slider_iamges(slider, limit=limit, shuffle=shuffle)
 
     show_nav = False if show_nav.lower() == 'false' else True
 
     return {
-        'slider_images': get_slider_iamges(slider, limit=limit, shuffle=shuffle),
+        'slider_images': images,
         'size': size,
         'show_nav': show_nav,
         'slider': slider,
+        'default': default,
     }
