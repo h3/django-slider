@@ -22,8 +22,6 @@ def render_slider(slider, *args, **kwargs):
     default  = kwargs.get('default', settings.DEFAULT)
     show_nav = False if show_nav.lower() == 'false' else True
 
-    print shuffle
-
     if type(shuffle) != type(True):
         shuffle  = False if shuffle.lower() == 'false' else True
 
