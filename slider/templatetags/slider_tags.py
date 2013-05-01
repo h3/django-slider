@@ -16,13 +16,18 @@ def get_slider_iamges(slider, limit=10, shuffle=True):
 def render_slider(slider, *args, **kwargs):
     span     = kwargs.get('span', 12)
     limit    = kwargs.get('limit', 10)
-    shuffle  = kwargs.get('shuffle', True)
+    shuffle  = kwargs.get('shuffle', False)
     show_nav = kwargs.get('show_nav', "True")
     size     = kwargs.get('size', '940x300')
     default  = kwargs.get('default', settings.DEFAULT)
-    images   = get_slider_iamges(slider, limit=limit, shuffle=shuffle)
-
     show_nav = False if show_nav.lower() == 'false' else True
+
+    print shuffle
+
+    if type(shuffle) != type(True):
+        shuffle  = False if shuffle.lower() == 'false' else True
+
+    images   = get_slider_iamges(slider, limit=limit, shuffle=shuffle)
 
     return {
         'slider_images': images,
